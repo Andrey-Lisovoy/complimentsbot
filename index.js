@@ -39,6 +39,7 @@ const client = new Client({
   port: pgConfig.port,
   password: pgConfig.password,
   database: pgConfig.database,
+  ssl: true,
 });
 
 client.connect();
