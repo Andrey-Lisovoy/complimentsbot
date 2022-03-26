@@ -15,6 +15,18 @@ const db = new sqlite3.Database("./mock.db", sqlite3.OPEN_READWRITE, (err) => {
 // db.run("CREATE TABLE complimentsreceived (id INTEGER, chatId INTEGER)");
 // } catch {}
 
+const express = require("express");
+const app = express();
+app.use(express.static("public"));
+app.get("/", (request, response) => {
+  response.sendFile(`${__dirname}/index.html`);
+});
+
+// слушаем поступающие сообщения
+var listener = app.listen(3000, () => {
+  console.log(`Your app is listening on port ${listener.address().port}`);
+});
+
 const token = "5155499994:AAGrikr7vtLum_naBEP-3i3uVxq-BnFnlU4";
 const bot = new TelegramApi(token, { polling: true });
 
