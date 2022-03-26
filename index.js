@@ -173,9 +173,9 @@ bot.on("message", async (msg) => {
           if (res.rows.length) {
             client.query(
               `INSERT INTO complimentsreceived (id, chatId) VALUES ($1,$2)`,
-              [rows[0].id, chatId]
+              [res.rows[0].id, chatId]
             );
-            return bot.sendMessage(chatId, rows[0].compliment);
+            return bot.sendMessage(chatId, res.rows[0].compliment);
           } else {
             return bot.sendMessage(
               chatId,
