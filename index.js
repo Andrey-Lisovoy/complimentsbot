@@ -2,29 +2,8 @@ const TelegramApi = require("node-telegram-bot-api");
 const TelegramBotPolling = require("node-telegram-bot-api/lib/telegramPolling");
 const sqlite3 = require("sqlite3").verbose();
 const { Client } = require("pg");
-const pgConfig = {};
 
-let databaseUrl = process.env.DATABASE_URL;
-
-databaseUrl = databaseUrl.replace("postgres://", "");
-let indexChar = databaseUrl.indexOf(":");
-pgConfig.user = databaseUrl.slice(0, indexChar);
-databaseUrl = databaseUrl.replace(pgConfig.user + ":", "");
-
-indexChar = databaseUrl.indexOf("@");
-pgConfig.password = databaseUrl.slice(0, indexChar);
-databaseUrl = databaseUrl.replace(pgConfig.password + "@", "");
-
-indexChar = databaseUrl.indexOf(":");
-pgConfig.host = databaseUrl.slice(0, indexChar);
-databaseUrl = databaseUrl.replace(pgConfig.host + ":", "");
-
-indexChar = databaseUrl.indexOf("/");
-pgConfig.port = databaseUrl.slice(0, indexChar);
-databaseUrl = databaseUrl.replace(pgConfig.port + "/", "");
-
-pgConfig.database = databaseUrl;
-console.log(pgConfig);
+const databaseUrl = process.env.DATABASE_URL;
 
 const db = new sqlite3.Database("./mock.db", sqlite3.OPEN_READWRITE, (err) => {
   if (err) return console.log(err.message);
@@ -32,12 +11,10 @@ const db = new sqlite3.Database("./mock.db", sqlite3.OPEN_READWRITE, (err) => {
 });
 
 const client = new Client({
-  host: pgConfig.host,
-  user: pgConfig.user,
-  port: pgConfig.port,
-  password: pgConfig.password,
-  database: pgConfig.database,
-  ssl: true,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 client.connect();
