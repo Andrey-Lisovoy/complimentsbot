@@ -4,7 +4,9 @@ const sqlite3 = require("sqlite3").verbose();
 const { Client } = require("pg");
 const pgConfig = {};
 
-let databaseUrl = process.env.DATABASE_URL;
+//const databaseUrl = process.env.DATABASE_URL;
+let databaseUrl =
+  "postgres://dzvophdaewxhaf:d004c7cc6d69a97527a598e3983002000bf8fe5bb6d85e13e901553b8fb608e8@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/db82904k63493m";
 
 databaseUrl = databaseUrl.replace("postgres://", "");
 let indexChar = databaseUrl.indexOf(":");
@@ -38,6 +40,8 @@ const client = new Client({
   password: pgConfig.password,
   database: pgConfig.database,
 });
+
+client.connect();
 
 // try {
 // db.run(
@@ -86,6 +90,7 @@ bot.on("message", async (msg) => {
     //     ]);
     //   }
     // });
+    console.log(client);
     client.query("SELECT * FROM chats WHERE id = $1", [chatId], (err, res) => {
       if (err) console.log(err.message);
       else if (res.rows.length === 0) {
