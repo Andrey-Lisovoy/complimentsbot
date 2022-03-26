@@ -23,7 +23,7 @@ app.get("/", (request, response) => {
 });
 
 // слушаем поступающие сообщения
-var listener = app.listen(3000, () => {
+var listener = app.listen(process.env.PORT, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
