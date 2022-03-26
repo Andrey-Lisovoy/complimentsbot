@@ -196,7 +196,7 @@ bot.on("message", async (msg) => {
 
   if (deleteCompliment[chatId] === 1) {
     //db.run(`DELETE FROM compliments WHERE id = ?`, [text]);
-    client.query("DELETE FROM compliments WHERE id = ?", [text]);
+    client.query("DELETE FROM compliments WHERE id = $1", [text]);
     delete deleteCompliment[chatId];
     return bot.sendMessage(chatId, "Комплимент удален");
   }
