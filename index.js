@@ -246,8 +246,8 @@ function sendCompliment() {
             if (err) console.log(err);
             else {
               if (res.rows.length) {
-                db.run(
-                  `INSERT INTO complimentsreceived (id, chatId) VALUES (?,?)`,
+                client.query(
+                  "INSERT INTO complimentsreceived (id, chatId) VALUES ($1,$2)",
                   [res.rows[0].id, row.id]
                 );
                 return bot.sendMessage(row.id, res.rows[0].compliment);
