@@ -27,6 +27,8 @@ var listener = app.listen(process.env.PORT, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
+console.log(process.env);
+
 const token = "5155499994:AAGrikr7vtLum_naBEP-3i3uVxq-BnFnlU4";
 const bot = new TelegramApi(token, { polling: true });
 
