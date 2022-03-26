@@ -150,9 +150,9 @@ function sendCompliment() {
   const date = new Date();
 
   if (
-    timesSendCompliment >= 2 //&&
-    //date.getUTCHours() + 2 < 9 &&
-    //date.getUTCHours() + 2 > 23
+    timesSendCompliment < 18 &&
+    date.getUTCHours() + 2 < 9 &&
+    date.getUTCHours() + 2 > 23
   ) {
     timesSendCompliment = 0;
     db.each("SELECT * from chats", [], (err, row) => {
