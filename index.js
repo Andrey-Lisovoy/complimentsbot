@@ -4,9 +4,7 @@ const sqlite3 = require("sqlite3").verbose();
 const { Client } = require("pg");
 const pgConfig = {};
 
-//const databaseUrl = process.env.DATABASE_URL;
-let databaseUrl =
-  "postgres://dzvophdaewxhaf:d004c7cc6d69a97527a598e3983002000bf8fe5bb6d85e13e901553b8fb608e8@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/db82904k63493m";
+const databaseUrl = process.env.DATABASE_URL;
 
 databaseUrl = databaseUrl.replace("postgres://", "");
 let indexChar = databaseUrl.indexOf(":");
