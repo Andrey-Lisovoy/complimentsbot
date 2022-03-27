@@ -68,7 +68,6 @@ bot.on("message", async (msg) => {
     //     ]);
     //   }
     // });
-    console.log(client);
     client.query("SELECT * FROM chats WHERE id = $1", [chatId], (err, res) => {
       if (err) console.log(err.message);
       else if (res.rows.length === 0) {
