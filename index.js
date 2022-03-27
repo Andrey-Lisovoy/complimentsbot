@@ -56,6 +56,8 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const username = msg.from.username;
 
+  console.log(msg);
+
   if (text === "/start") {
     // db.all("SELECT * from chats WHERE id = ?", [chatId], (err, rows) => {
     //   if (err) console.log(err.message);
@@ -137,7 +139,7 @@ bot.on("message", async (msg) => {
     client.query("SELECT * from chats", [], (err, res) => {
       if (err) console.log(err.message);
       for (let row of res.rows) {
-        bot.sendMessage(chatId, `ID: ${row.id} ${row.compliment}`);
+        bot.sendMessage(chatId, `ID: ${row.id} ${row.username}`);
       }
     });
   }
@@ -211,7 +213,7 @@ function sendCompliment() {
   const date = new Date();
 
   if (
-    timesSendCompliment < 18 &&
+    timesSendCompliment >= 18 &&
     date.getUTCHours() + 2 < 9 &&
     date.getUTCHours() + 2 > 23
   ) {
