@@ -213,8 +213,8 @@ function sendCompliment() {
 
   if (
     timesSendCompliment >= 18 &&
-    date.getUTCHours() + 2 < 9 &&
-    date.getUTCHours() + 2 > 23
+    date.getUTCHours() + 3 < 9 &&
+    date.getUTCHours() + 3 > 23
   ) {
     // timesSendCompliment = 0;
     // db.each("SELECT * from chats", [], (err, row) => {
