@@ -143,6 +143,10 @@ bot.on("message", async (msg) => {
     });
   }
 
+  if (text === "/sendcompliments") {
+    sendCompliment();
+  }
+
   if (text === "/getcompliment") {
     // db.all(
     //   "SELECT compliments.id, compliments.compliment from compliments LEFT JOIN complimentsreceived ON compliments.id = complimentsreceived.id AND complimentsreceived.chatId = ?  WHERE complimentsreceived.id IS NULL LIMIT 1",
@@ -213,8 +217,8 @@ function sendCompliment() {
 
   if (
     timesSendCompliment >= 18 &&
-    date.getUTCHours() + 3 < 9 &&
-    date.getUTCHours() + 3 > 23
+    date.getUTCHours() + 3 >= 9 &&
+    date.getUTCHours() + 3 < 23
   ) {
     // timesSendCompliment = 0;
     // db.each("SELECT * from chats", [], (err, row) => {
